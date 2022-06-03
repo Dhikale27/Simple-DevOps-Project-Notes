@@ -30,4 +30,20 @@
    [root@ip-172-31-36-125 opt]# mv apache-tomcat-9.0.63 tomcat
    
    ```
+   
+3. Starting tomcat server
+   ```sh
+     # go to bin dir
+     [root@ip-172-31-36-125 opt]# cd tomcat
+     [root@ip-172-31-36-125 tomcat]# cd bin/
+     
+     # executing startup.sh file
+     [root@ip-172-31-36-125 bin]# ./startup.sh
+     
+     access tomcat application from browser on port 8080  
+     http://<Public_IP>:8080
+   ```
+4. Changing tomcat server port
+   -   Using unique ports for each application is a best practice in an environment. But tomcat and Jenkins runs on ports number 8080. Hence lets change tomcat port number to 8090. Change port number in conf/server.xml file under tomcat home
+
 # ads
