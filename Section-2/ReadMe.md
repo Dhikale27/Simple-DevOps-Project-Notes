@@ -118,22 +118,22 @@ Maven is a code build tool which used to convert your code to an artifact. this 
 #### Install Maven on Jenkins
 1. Download maven packages https://maven.apache.org/download.cgi onto Jenkins server. In this case, I am using /opt/maven as my installation directory
  - Link : https://maven.apache.org/download.cgi
-   
-     - Go to linux terminal (in my case MobaXterm terminal)
+   ```sh
+   - Go to linux terminal (in my case MobaXterm terminal)
         [root@ip-172-31-34-251 ~]# cd /opt
         [root@ip-172-31-34-251 opt]# ll
           total 0
           drwxr-xr-x 4 root root 33 Apr 28 19:54 aws
           drwxr-xr-x 2 root root  6 Aug 16  2018 rh
      
-     - downloading maven version 3.6.0
+     - downloading maven version 3.8.5 in this dir
        [root@ip-172-31-34-251 opt]# wget https://dlcdn.apache.org/maven/maven-3/3.8.5/binaries/apache-maven-3.8.5-bin.tar.gz
      
        [root@ip-172-31-34-251 opt]# ll
          total 8472
-        -rw-r--r-- 1 root root 8673123 Mar  5 15:51 `apache-maven-3.8.5-bin.tar.gz`
-        drwxr-xr-x 4 root root      33 Apr 28 19:54 aws
-        drwxr-xr-x 2 root root       6 Aug 16  2018 rh
+         -rw-r--r-- 1 root root 8673123 Mar  5 15:51 `apache-maven-3.8.5-bin.tar.gz`
+         drwxr-xr-x 4 root root      33 Apr 28 19:54 aws
+         drwxr-xr-x 2 root root       6 Aug 16  2018 rh
      
      - extract file and rename that file
      
@@ -148,15 +148,16 @@ Maven is a code build tool which used to convert your code to an artifact. this 
          drwxr-xr-x 2 root root       6 Aug 16  2018 rh
        [root@ip-172-31-34-251 opt]#
        [root@ip-172-31-34-251 opt]#
+       ```
 
 	
 2. Setup M2_HOME and M2 paths in .bash_profile of the user and add these to the path variable
-
+  ```sh
    - to go root dir
     - [root@ip-172-31-34-251 opt]# cd ~
    - to get hidden files
     - [root@ip-172-31-34-251 ~]# ll -a
-    -  ```sh
+    
        total 20
        dr-xr-x---  3 root root 103 Jun  3 02:37 .
        dr-xr-xr-x 18 root root 257 Jun  3 02:37 ..
@@ -215,7 +216,7 @@ Maven is a code build tool which used to convert your code to an artifact. this 
      ~
      -- INSERT --   
      
-     ```
+ 
    
    - to load new edited file
      [root@ip-172-31-34-251 ~]# source .bash_profile
@@ -233,6 +234,8 @@ Maven is a code build tool which used to convert your code to an artifact. this 
       ```sh
         mvn --version
 	```
+```
+
     
     
 So far we have completed the installation of maven software to support maven plugin on the jenkins console. Let's jump onto Jenkins to complete the remaining steps. 
