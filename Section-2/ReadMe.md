@@ -247,3 +247,14 @@ So far we have completed the installation of maven software to support maven plu
 
 2. Configure maven path
    - `Manage Jenkins` > `Global Tool Configuration` > `Add JDK : Name = java-11 & JAVA_HOME = /usr/lib/jvm/java-11-openjdk-11.0.13.0.8-1.amzn2.0.3.x86_64` > `Add Maven : Name = maven-3.8.5 & MAVEN_HOME= /opt/maven` > `Apply & Save`
+
+
+## -----------------------------------------------------------------------------------------------
+
+# Building Java Project using Maven
+
+- Creating new job
+  - `New Item` > `Enter item Name` > `Maven Project` > `description` > `git: Repository Url = <repository url>` > ` Build : Gola and Options = clean install` > `Apply and Save`
+
+- Building project (or executing the job)
+  - `Build Now` > `Build history : click here to open the console` >  console will open with all activity detail
