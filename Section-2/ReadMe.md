@@ -199,7 +199,7 @@ Maven is a code build tool which used to convert your code to an artifact. this 
    fi
    `M2_HOME=/opt/maven
    M2=/opt/maven/bin
-   JAVA_HOME=/usr/lib/jvm/java-11-openjdk-11.0.13.0.8-1.amzn2.0.3.x86_64
+   JAVA_HOME=/usr/lib/jvm/java-11-openjdk-11.0.13.0.8-1.amzn2.0.3.x86_64`
 
    # User specific environment and startup programs
 
