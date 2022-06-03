@@ -129,7 +129,7 @@ Maven is a code build tool which used to convert your code to an artifact. this 
      # downloading maven version 3.6.0
      [root@ip-172-31-34-251 opt]# wget https://dlcdn.apache.org/maven/maven-3/3.8.5/binaries/apache-maven-3.8.5-bin.tar.gz
      
-     enter and the tar file get download in /opt folder
+     # enter and the tar file get download in /opt folder
      
      [root@ip-172-31-34-251 opt]# ll
      total 8472
@@ -137,7 +137,7 @@ Maven is a code build tool which used to convert your code to an artifact. this 
      drwxr-xr-x 4 root root      33 Apr 28 19:54 aws
      drwxr-xr-x 2 root root       6 Aug 16  2018 rh
      
-     then extract file and rename that file
+     # then extract file and rename that file
      
      [root@ip-172-31-34-251 opt]# tar -xvzf apache-maven-3.8.5-bin.tar.gz
      
@@ -156,18 +156,60 @@ Maven is a code build tool which used to convert your code to an artifact. this 
 	
 1. Setup M2_HOME and M2 paths in .bash_profile of the user and add these to the path variable
    ```sh
-[root@ip-172-31-34-251 opt]# cd ~
-[root@ip-172-31-34-251 ~]# ll -a
-total 20
-dr-xr-x---  3 root root 103 Jun  3 02:37 .
-dr-xr-xr-x 18 root root 257 Jun  3 02:37 ..
--rw-r--r--  1 root root  18 Oct 18  2017 .bash_logout
--rw-r--r--  1 root root 176 Oct 18  2017 .bash_profile
--rw-r--r--  1 root root 176 Oct 18  2017 .bashrc
--rw-r--r--  1 root root 100 Oct 18  2017 .cshrc
-drwx------  2 root root  29 Jun  3 02:37 .ssh
--rw-r--r--  1 root root 129 Oct 18  2017 .tcshrc
-[root@ip-172-31-34-251 ~]#
+   # to go root dir
+   [root@ip-172-31-34-251 opt]# cd ~
+   # to get hiiden files
+   [root@ip-172-31-34-251 ~]# ll -a
+   total 20
+   dr-xr-x---  3 root root 103 Jun  3 02:37 .
+   dr-xr-xr-x 18 root root 257 Jun  3 02:37 ..
+   -rw-r--r--  1 root root  18 Oct 18  2017 .bash_logout
+   -rw-r--r--  1 root root 176 Oct 18  2017 .bash_profile
+   -rw-r--r--  1 root root 176 Oct 18  2017 .bashrc
+   -rw-r--r--  1 root root 100 Oct 18  2017 .cshrc
+   drwx------  2 root root  29 Jun  3 02:37 .ssh
+   -rw-r--r--  1 root root 129 Oct 18  2017 .tcshrc
+   [root@ip-172-31-34-251 ~]#
+   
+   # to get the path ex java-11
+   [root@ip-172-31-34-251 jvm]# find / -name java-11*
+   /usr/lib/jvm/java-11-openjdk-11.0.13.0.8-1.amzn2.0.3.x86_64
+   /usr/share/doc/java-11-openjdk-11.0.13.0.8-1.amzn2.0.3.x86_64
+   [root@ip-172-31-34-251 jvm]#
+
+   
+   # to edit the .bash_profile file
+   [root@ip-172-31-34-251 jvm]# vi .bash_profile
+   
+   >> we get bash file after edit file look like as below
+   
+   # .bash_profile
+
+   # Get the aliases and functions
+   if [ -f ~/.bashrc ]; then
+        . ~/.bashrc
+   fi
+   M2_HOME=/opt/maven
+   M2=/opt/maven/bin
+   JAVA_HOME=/usr/lib/jvm/java-11-openjdk-11.0.13.0.8-1.amzn2.0.3.x86_64
+
+   # User specific environment and startup programs
+
+   PATH=$PATH:$HOME/bin:$JAVA_HOME:$M2_HOME:$M2
+
+   export PATHG
+
+   ~
+   ~
+   ~
+   ~
+   ~
+   ~
+   ~
+   -- INSERT --   
+   
+   
+   
 
 
    vi ~/.bash_profile
