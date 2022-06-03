@@ -215,8 +215,17 @@ Maven is a code build tool which used to convert your code to an artifact. this 
    ~
    ~
    -- INSERT --   
-  
-  
+   
+   # to load new edited file
+   [root@ip-172-31-34-251 ~]# source .bash_profile
+   [root@ip-172-31-34-251 ~]# echo $PATH
+   
+   # to check our changes
+   /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin:/root/bin:/usr/lib/jvm/java-11-openjdk-11.0.13.0.8-1.amzn2.0.3.x86_64:/opt/maven:/opt/maven/bin
+   [root@ip-172-31-34-251 ~]#
+   
+   
+  or we can do as below
    ```
 #### Checkpoint 
 1. logoff and login to check maven version
@@ -228,8 +237,7 @@ So far we have completed the installation of maven software to support maven plu
 
 ### Setup maven on Jenkins console
 1. Install maven plugin without restart  
-  - `Manage Jenkins` > `Jenkins Plugins` > `available` > `Maven Invoker`
   - `Manage Jenkins` > `Jenkins Plugins` > `available` > `Maven Integration`
 
 2. Configure maven path
-  - `Manage Jenkins` > `Global Tool Configuration` > `Maven`
+  - `Manage Jenkins` > `Global Tool Configuration` > `Add JDK : Name = java-11 & JAVA_HOME = /usr/lib/jvm/java-11-openjdk-11.0.13.0.8-1.amzn2.0.3.x86_64` > `Add Maven : Name = maven-3.8.5 & MAVEN_HOME= /opt/maven` > `Apply & Save`
