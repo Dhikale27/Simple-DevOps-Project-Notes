@@ -153,18 +153,20 @@ Maven is a code build tool which used to convert your code to an artifact. this 
 2. Setup M2_HOME and M2 paths in .bash_profile of the user and add these to the path variable
 
    - to go root dir
-     [root@ip-172-31-34-251 opt]# cd ~
+    - [root@ip-172-31-34-251 opt]# cd ~
    - to get hidden files
-      [root@ip-172-31-34-251 ~]# ll -a
-       - total 20
-       - dr-xr-x---  3 root root 103 Jun  3 02:37 .
-       - dr-xr-xr-x 18 root root 257 Jun  3 02:37 ..
-       - -rw-r--r--  1 root root  18 Oct 18  2017 .bash_logout
-       - -rw-r--r--  1 root root 176 Oct 18  2017 .bash_profile
-       - -rw-r--r--  1 root root 176 Oct 18  2017 .bashrc
-       - -rw-r--r--  1 root root 100 Oct 18  2017 .cshrc
-       - -drwx------  2 root root  29 Jun  3 02:37 .ssh
-       - -rw-r--r--  1 root root 129 Oct 18  2017 .tcshrc
+    - [root@ip-172-31-34-251 ~]# ll -a
+    -  ```sh
+       total 20
+       dr-xr-x---  3 root root 103 Jun  3 02:37 .
+       dr-xr-xr-x 18 root root 257 Jun  3 02:37 ..
+       -rw-r--r--  1 root root  18 Oct 18  2017 .bash_logout
+       -rw-r--r--  1 root root 176 Oct 18  2017 .bash_profile
+       -rw-r--r--  1 root root 176 Oct 18  2017 .bashrc
+       -rw-r--r--  1 root root 100 Oct 18  2017 .cshrc
+       -drwx------  2 root root  29 Jun  3 02:37 .ssh
+       -rw-r--r--  1 root root 129 Oct 18  2017 .tcshrc
+       ```
    [root@ip-172-31-34-251 ~]#
    
    - to get the path ex java-11
