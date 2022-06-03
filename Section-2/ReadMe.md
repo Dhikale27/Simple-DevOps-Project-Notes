@@ -119,16 +119,57 @@ Maven is a code build tool which used to convert your code to an artifact. this 
 1. Download maven packages https://maven.apache.org/download.cgi onto Jenkins server. In this case, I am using /opt/maven as my installation directory
  - Link : https://maven.apache.org/download.cgi
     ```sh
-     # Creating maven directory under /opt
-     mkdir /opt/maven
-     cd /opt/maven
+     # Go to linux terminal (in my case MobaXterm terminal)
+      [root@ip-172-31-34-251 ~]# cd /opt
+      [root@ip-172-31-34-251 opt]# ll
+      total 0
+     drwxr-xr-x 4 root root 33 Apr 28 19:54 aws
+     drwxr-xr-x 2 root root  6 Aug 16  2018 rh
+     
      # downloading maven version 3.6.0
-     wget http://mirrors.estointernet.in/apache/maven/maven-3/3.6.1/binaries/apache-maven-3.6.1-bin.tar.gz
-     tar -xvzf apache-maven-3.6.1-bin.tar.gz
+     [root@ip-172-31-34-251 opt]# wget https://dlcdn.apache.org/maven/maven-3/3.8.5/binaries/apache-maven-3.8.5-bin.tar.gz
+     
+     enter and the tar file get download in /opt folder
+     
+     [root@ip-172-31-34-251 opt]# ll
+     total 8472
+     -rw-r--r-- 1 root root 8673123 Mar  5 15:51 `apache-maven-3.8.5-bin.tar.gz`
+     drwxr-xr-x 4 root root      33 Apr 28 19:54 aws
+     drwxr-xr-x 2 root root       6 Aug 16  2018 rh
+     
+     then extract file and rename that file
+     
+     [root@ip-172-31-34-251 opt]# tar -xvzf apache-maven-3.8.5-bin.tar.gz
+     
+     [root@ip-172-31-34-251 opt]# mv apache-maven-3.8.5 maven
+     [root@ip-172-31-34-251 opt]# ll
+     total 8472
+     -rw-r--r-- 1 root root 8673123 Mar  5 15:51 apache-maven-3.8.5-bin.tar.gz
+     drwxr-xr-x 4 root root      33 Apr 28 19:54 aws
+     drwxr-xr-x 6 root root      99 Jun  3 04:51 maven
+     drwxr-xr-x 2 root root       6 Aug 16  2018 rh
+     [root@ip-172-31-34-251 opt]#
+     [root@ip-172-31-34-251 opt]#
+
+
      ```
 	
 1. Setup M2_HOME and M2 paths in .bash_profile of the user and add these to the path variable
    ```sh
+[root@ip-172-31-34-251 opt]# cd ~
+[root@ip-172-31-34-251 ~]# ll -a
+total 20
+dr-xr-x---  3 root root 103 Jun  3 02:37 .
+dr-xr-xr-x 18 root root 257 Jun  3 02:37 ..
+-rw-r--r--  1 root root  18 Oct 18  2017 .bash_logout
+-rw-r--r--  1 root root 176 Oct 18  2017 .bash_profile
+-rw-r--r--  1 root root 176 Oct 18  2017 .bashrc
+-rw-r--r--  1 root root 100 Oct 18  2017 .cshrc
+drwx------  2 root root  29 Jun  3 02:37 .ssh
+-rw-r--r--  1 root root 129 Oct 18  2017 .tcshrc
+[root@ip-172-31-34-251 ~]#
+
+
    vi ~/.bash_profile
    M2_HOME=/opt/maven/apache-maven-3.6.1
    M2=$M2_HOME/bin
