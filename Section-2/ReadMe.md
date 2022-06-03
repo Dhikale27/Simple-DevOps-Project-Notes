@@ -189,7 +189,7 @@ Maven is a code build tool which used to convert your code to an artifact. this 
 	
 	
    
-   >> we get bash file after edit file look like as below
+   . we get bash file after edit file look like as below
    
    # .bash_profile
 
