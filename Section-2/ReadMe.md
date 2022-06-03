@@ -155,7 +155,7 @@ Maven is a code build tool which used to convert your code to an artifact. this 
    - to go root dir
      [root@ip-172-31-34-251 opt]# cd ~
    - to get hidden files
-     [root@ip-172-31-34-251 ~]# ll -a
+     - [root@ip-172-31-34-251 ~]# ll -a
        total 20
        dr-xr-x---  3 root root 103 Jun  3 02:37 .
        dr-xr-xr-x 18 root root 257 Jun  3 02:37 ..
