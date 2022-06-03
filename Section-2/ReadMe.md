@@ -227,15 +227,19 @@ Maven is a code build tool which used to convert your code to an artifact. this 
    
   or we can do as below
    ```
-#### Checkpoint 
+   
+#### Checkpoint
 1. logoff and login to check maven version
   
     ```sh
     mvn --version
     ```
+    
+    
 So far we have completed the installation of maven software to support maven plugin on the jenkins console. Let's jump onto Jenkins to complete the remaining steps. 
 
-### Setup maven on Jenkins console
+#### Setup maven on Jenkins console
+
 1. Install maven plugin without restart  
    - `Manage Jenkins` > `Jenkins Plugins` > `available` > `Maven Integration`
 
