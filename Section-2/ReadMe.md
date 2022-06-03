@@ -181,6 +181,14 @@ Maven is a code build tool which used to convert your code to an artifact. this 
    # to edit the .bash_profile file
    [root@ip-172-31-34-251 jvm]# vi .bash_profile
    
+   # to edit in vi editor we have to use command like
+   	to insert data : o (press o)
+	to save data : w (press shift + : + w)
+	to save & quite : wq (press shift + : + wq)
+	to quite w/o save : q! (press shift + : + q!)
+	
+	
+   
    >> we get bash file after edit file look like as below
    
    # .bash_profile
