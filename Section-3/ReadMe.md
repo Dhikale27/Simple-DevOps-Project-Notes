@@ -199,6 +199,21 @@
 ## ----------------------------------------------------------------------------------------
 
 # Integrating tomcat with Jenkins
+  1. Install Deploy to container without restart 
+    - `Manage Jenkins` > `Manage plugin` > `available` > `Deploy to container` 
+  
+  2. Managing the credentials
+     - `Manage Jenkins` > `Manage Credentials` > `Jenkins` > `Globale credentials` > `Add Credentials` 
+           - Username : deployer
+           - Password : deployer
+           - ID : tomacat_deployer
+           - Description : tomacat_deployer
+  3. Creating new job  
+     - `New Item` > `Enter an item name` > `Maven Project` > `OK` > `Description` > `Source Code Management : Git : Repository Url = <address of git repo>` > `Build : goals and option = clean install` > `Post-build Actions : Deploy war'ear to container : WAR/EAR Files = **/*.war` > `Container : Add Container = Tomcat8x : Tomcat Url = http://<public ip add>:<port>/` > `Apply & Save`
+  
+  4. Build Code
+     - Build code using build now and open the console 
+     - refresh the tomcate server we will get /webapp option click on it new jsp page will open with form in it
    
 
 # ads
