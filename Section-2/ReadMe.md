@@ -189,7 +189,7 @@ Maven is a code build tool which used to convert your code to an artifact. this 
 	
 	
    
-   * we get bash file after edit file look like as below
+   # we get bash file after edit file look like as below
    
    # .bash_profile
 
@@ -197,13 +197,13 @@ Maven is a code build tool which used to convert your code to an artifact. this 
    if [ -f ~/.bashrc ]; then
         . ~/.bashrc
    fi
-   M2_HOME=/opt/maven
+   `M2_HOME=/opt/maven
    M2=/opt/maven/bin
    JAVA_HOME=/usr/lib/jvm/java-11-openjdk-11.0.13.0.8-1.amzn2.0.3.x86_64
 
    # User specific environment and startup programs
 
-   PATH=$PATH:$HOME/bin:$JAVA_HOME:$M2_HOME:$M2
+   PATH=$PATH:$HOME/bin:$JAVA_HOME:$M2_HOME:$M2`
 
    export PATHG
 
@@ -215,15 +215,8 @@ Maven is a code build tool which used to convert your code to an artifact. this 
    ~
    ~
    -- INSERT --   
-   
-   
-   
-
-
-   vi ~/.bash_profile
-   M2_HOME=/opt/maven/apache-maven-3.6.1
-   M2=$M2_HOME/bin
-   PATH=<Existing_PATH>:$M2_HOME:$M2
+  
+  
    ```
 #### Checkpoint 
 1. logoff and login to check maven version
