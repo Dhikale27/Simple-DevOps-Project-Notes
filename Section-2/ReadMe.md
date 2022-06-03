@@ -100,4 +100,4 @@ Git is one of the most popular tools for version control system. you can pull co
 # Run Jenkin Job to Pull Code from GitHub
 
 ### creating new Job
-	Go to `New Item` > `Enter an item name: PullingCodeFromGitHub` > `select Free Style Project` > `click on OK` > `Description: Pulling code from Github` > `Source Code Management: select Git: Repository URL= https://github.com/Dhikale27/hello-world-devops.git` > `Apply & Save`
+	- `New Item` > `Enter an item name: PullingCodeFromGitHub` > `select Free Style Project` > `click on OK` > `Description: Pulling code from Github` > `Source Code Management: select Git: Repository URL= https://github.com/Dhikale27/hello-world-devops.git` > `Apply & Save`
