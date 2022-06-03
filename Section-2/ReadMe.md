@@ -118,122 +118,119 @@ Maven is a code build tool which used to convert your code to an artifact. this 
 #### Install Maven on Jenkins
 1. Download maven packages https://maven.apache.org/download.cgi onto Jenkins server. In this case, I am using /opt/maven as my installation directory
  - Link : https://maven.apache.org/download.cgi
-    ```sh
-     # Go to linux terminal (in my case MobaXterm terminal)
-      [root@ip-172-31-34-251 ~]# cd /opt
-      [root@ip-172-31-34-251 opt]# ll
-      total 0
-     drwxr-xr-x 4 root root 33 Apr 28 19:54 aws
-     drwxr-xr-x 2 root root  6 Aug 16  2018 rh
+   
+     - Go to linux terminal (in my case MobaXterm terminal)
+        [root@ip-172-31-34-251 ~]# cd /opt
+        [root@ip-172-31-34-251 opt]# ll
+          total 0
+          drwxr-xr-x 4 root root 33 Apr 28 19:54 aws
+          drwxr-xr-x 2 root root  6 Aug 16  2018 rh
      
-     # downloading maven version 3.6.0
-     [root@ip-172-31-34-251 opt]# wget https://dlcdn.apache.org/maven/maven-3/3.8.5/binaries/apache-maven-3.8.5-bin.tar.gz
+     - downloading maven version 3.6.0
+       [root@ip-172-31-34-251 opt]# wget https://dlcdn.apache.org/maven/maven-3/3.8.5/binaries/apache-maven-3.8.5-bin.tar.gz
      
-     # enter and the tar file get download in /opt folder
+       [root@ip-172-31-34-251 opt]# ll
+         total 8472
+        -rw-r--r-- 1 root root 8673123 Mar  5 15:51 `apache-maven-3.8.5-bin.tar.gz`
+        drwxr-xr-x 4 root root      33 Apr 28 19:54 aws
+        drwxr-xr-x 2 root root       6 Aug 16  2018 rh
      
-     [root@ip-172-31-34-251 opt]# ll
-     total 8472
-     -rw-r--r-- 1 root root 8673123 Mar  5 15:51 `apache-maven-3.8.5-bin.tar.gz`
-     drwxr-xr-x 4 root root      33 Apr 28 19:54 aws
-     drwxr-xr-x 2 root root       6 Aug 16  2018 rh
+     - extract file and rename that file
      
-     # then extract file and rename that file
+       [root@ip-172-31-34-251 opt]# tar -xvzf apache-maven-3.8.5-bin.tar.gz
      
-     [root@ip-172-31-34-251 opt]# tar -xvzf apache-maven-3.8.5-bin.tar.gz
-     
-     [root@ip-172-31-34-251 opt]# mv apache-maven-3.8.5 maven
-     [root@ip-172-31-34-251 opt]# ll
-     total 8472
-     -rw-r--r-- 1 root root 8673123 Mar  5 15:51 apache-maven-3.8.5-bin.tar.gz
-     drwxr-xr-x 4 root root      33 Apr 28 19:54 aws
-     drwxr-xr-x 6 root root      99 Jun  3 04:51 maven
-     drwxr-xr-x 2 root root       6 Aug 16  2018 rh
-     [root@ip-172-31-34-251 opt]#
-     [root@ip-172-31-34-251 opt]#
+       [root@ip-172-31-34-251 opt]# mv apache-maven-3.8.5 maven
+       [root@ip-172-31-34-251 opt]# ll
+         total 8472
+         -rw-r--r-- 1 root root 8673123 Mar  5 15:51 apache-maven-3.8.5-bin.tar.gz
+         drwxr-xr-x 4 root root      33 Apr 28 19:54 aws
+         drwxr-xr-x 6 root root      99 Jun  3 04:51 maven
+         drwxr-xr-x 2 root root       6 Aug 16  2018 rh
+       [root@ip-172-31-34-251 opt]#
+       [root@ip-172-31-34-251 opt]#
 
-
-     ```
 	
-1. Setup M2_HOME and M2 paths in .bash_profile of the user and add these to the path variable
-   ```sh
-   # to go root dir
-   [root@ip-172-31-34-251 opt]# cd ~
-   # to get hiiden files
-   [root@ip-172-31-34-251 ~]# ll -a
-   total 20
-   dr-xr-x---  3 root root 103 Jun  3 02:37 .
-   dr-xr-xr-x 18 root root 257 Jun  3 02:37 ..
-   -rw-r--r--  1 root root  18 Oct 18  2017 .bash_logout
-   -rw-r--r--  1 root root 176 Oct 18  2017 .bash_profile
-   -rw-r--r--  1 root root 176 Oct 18  2017 .bashrc
-   -rw-r--r--  1 root root 100 Oct 18  2017 .cshrc
-   drwx------  2 root root  29 Jun  3 02:37 .ssh
-   -rw-r--r--  1 root root 129 Oct 18  2017 .tcshrc
+2. Setup M2_HOME and M2 paths in .bash_profile of the user and add these to the path variable
+
+   - to go root dir
+     [root@ip-172-31-34-251 opt]# cd ~
+   - to get hidden files
+     [root@ip-172-31-34-251 ~]# ll -a
+       total 20
+       dr-xr-x---  3 root root 103 Jun  3 02:37 .
+       dr-xr-xr-x 18 root root 257 Jun  3 02:37 ..
+       -rw-r--r--  1 root root  18 Oct 18  2017 .bash_logout
+       -rw-r--r--  1 root root 176 Oct 18  2017 .bash_profile
+       -rw-r--r--  1 root root 176 Oct 18  2017 .bashrc
+       -rw-r--r--  1 root root 100 Oct 18  2017 .cshrc
+       drwx------  2 root root  29 Jun  3 02:37 .ssh
+       -rw-r--r--  1 root root 129 Oct 18  2017 .tcshrc
    [root@ip-172-31-34-251 ~]#
    
-   # to get the path ex java-11
-   [root@ip-172-31-34-251 jvm]# find / -name java-11*
-   /usr/lib/jvm/java-11-openjdk-11.0.13.0.8-1.amzn2.0.3.x86_64
-   /usr/share/doc/java-11-openjdk-11.0.13.0.8-1.amzn2.0.3.x86_64
-   [root@ip-172-31-34-251 jvm]#
+   - to get the path ex java-11
+     [root@ip-172-31-34-251 jvm]# find / -name java-11*
+       /usr/lib/jvm/java-11-openjdk-11.0.13.0.8-1.amzn2.0.3.x86_64
+       /usr/share/doc/java-11-openjdk-11.0.13.0.8-1.amzn2.0.3.x86_64
+     [root@ip-172-31-34-251 jvm]#
 
    
-   # to edit the .bash_profile file
-   [root@ip-172-31-34-251 jvm]# vi .bash_profile
+   - to edit the .bash_profile file
+     [root@ip-172-31-34-251 jvm]# vi .bash_profile
    
-   # to edit in vi editor we have to use command like
-   	to insert data : o (press o)
-	to save data : w (press shift + : + w)
-	to save & quite : wq (press shift + : + wq)
-	to quite w/o save : q! (press shift + : + q!)
+   - to edit in vi editor we have to use command like
+   	- to insert data : o (press o)
+   	- to change command : press Esc 
+	- to save data : w (press shift + : + w)
+	- to save & quite : wq (press shift + : + wq)
+	- to quite w/o save : q! (press shift + : + q!)
 	
 	
    
-   # we get bash file after edit file look like as below
-   
-   # .bash_profile
+   - we get bash file after edit file look like as below
+     ```sh
+     # .bash_profile
 
-   # Get the aliases and functions
-   if [ -f ~/.bashrc ]; then
+     # Get the aliases and functions
+     if [ -f ~/.bashrc ]; then
         . ~/.bashrc
-   fi
-   `M2_HOME=/opt/maven
-   M2=/opt/maven/bin
-   JAVA_HOME=/usr/lib/jvm/java-11-openjdk-11.0.13.0.8-1.amzn2.0.3.x86_64`
+     fi
+     M2_HOME=/opt/maven
+     M2=/opt/maven/bin
+     JAVA_HOME=/usr/lib/jvm/java-11-openjdk-11.0.13.0.8-1.amzn2.0.3.x86_64
 
-   # User specific environment and startup programs
+     # User specific environment and startup programs
 
-   PATH=$PATH:$HOME/bin:$JAVA_HOME:$M2_HOME:$M2`
+     PATH=$PATH:$HOME/bin:$JAVA_HOME:$M2_HOME:$M2`
 
-   export PATHG
+     export PATHG
 
-   ~
-   ~
-   ~
-   ~
-   ~
-   ~
-   ~
-   -- INSERT --   
+     ~
+     ~
+     ~
+     ~
+     ~
+     ~
+     ~
+     -- INSERT --   
+     
+     ```
    
-   # to load new edited file
-   [root@ip-172-31-34-251 ~]# source .bash_profile
-   [root@ip-172-31-34-251 ~]# echo $PATH
+   - to load new edited file
+     [root@ip-172-31-34-251 ~]# source .bash_profile
+     
    
-   # to check our changes
-   /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin:/root/bin:/usr/lib/jvm/java-11-openjdk-11.0.13.0.8-1.amzn2.0.3.x86_64:/opt/maven:/opt/maven/bin
-   [root@ip-172-31-34-251 ~]#
+   - to check our changes
+     [root@ip-172-31-34-251 ~]# echo $PATH
+       /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin:/root/bin:/usr/lib/jvm/java-11-openjdk-11.0.13.0.8-1.amzn2.0.3.x86_64:/opt/maven:/opt/maven/bin
+     [root@ip-172-31-34-251 ~]#
    
    
-  or we can do as below
-   ```
-   
-#### Checkpoint
-1. logoff and login to check maven version
+  - or we can do as below
+      1. logoff and login to check maven version
   
-    ```sh
-    mvn --version
-    ```
+      ```sh
+        mvn --version
+	```
     
     
 So far we have completed the installation of maven software to support maven plugin on the jenkins console. Let's jump onto Jenkins to complete the remaining steps. 
