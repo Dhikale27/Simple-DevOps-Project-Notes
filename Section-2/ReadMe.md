@@ -69,3 +69,27 @@ http://YOUR-SERVER-PUBLIC-IP:8080
 1. Save your job 
 1. Build job
 1. Check "console output"
+#------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Intigrating Git with Jenkins
+Git is one of the most popular tools for version control system. you can pull code from git repositories using jenkins if you use github plugin. 
+
+
+#### Prerequisites
+1. Jenkins server 
+
+#### Install Git on Jenkins server
+1. Install git packages on jenkins server
+   ```sh
+   yum install git -y
+   ```
+
+#### Setup Git on jenkins console
+- Install git plugin without restart  
+  - `Manage Jenkins` > `Jenkins Plugins` > `available` > `github`
+
+- Configure git path
+  - `Manage Jenkins` > `Global Tool Configuration` > `git`
+  - In Path to Git executable
+   - we can use `git` only
+   - if above not work then add git path (to get git path use comand in linux terminal # `whereis git`)
