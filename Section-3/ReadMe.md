@@ -43,7 +43,162 @@
      access tomcat application from browser on port 8080  
      http://<Public_IP>:8080
    ```
-4. Changing tomcat server port
-   -   Using unique ports for each application is a best practice in an environment. But tomcat and Jenkins runs on ports number 8080. Hence lets change tomcat port number to 8090. Change port number in conf/server.xml file under tomcat home
+4. Make a tomcate server globally accessible
+   - currently our tomcate server work only in folder where its install so to make that server globally available make change in contex.xml file
+   ```sh
+   #to know the location of contex.xml file
+    [root@ip-172-31-36-125 ~]# find / -name context.xml
+       /opt/tomcat/conf/context.xml
+       /opt/tomcat/webapps/examples/META-INF/context.xml
+       /opt/tomcat/webapps/host-manager/META-INF/context.xml
+       /opt/tomcat/webapps/manager/META-INF/context.xml
+       
+   # we have to edit last two file
+   # edit "/opt/tomcat/webapps/host-manager/META-INF/context.xml" file
+   [root@ip-172-31-36-125 ~]# vi /opt/tomcat/webapps/host-manager/META-INF/context.xml
+   
+   we have to comment out <!-- <value>...</value> --> tag after editing our file lookes like
+   
+   <?xml version="1.0" encoding="UTF-8"?>
+   <!--
+     Licensed to the Apache Software Foundation (ASF) under one or more
+     contributor license agreements.  See the NOTICE file distributed with
+     this work for additional information regarding copyright ownership.
+     The ASF licenses this file to You under the Apache License, Version 2.0
+     (the "License"); you may not use this file except in compliance with
+     the License.  You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+   -->
+   <Context antiResourceLocking="false" privileged="true" >
+     <CookieProcessor className="org.apache.tomcat.util.http.Rfc6265CookieProcessor"
+                      sameSiteCookies="strict" />
+   <!--  <Valve className="org.apache.catalina.valves.RemoteAddrValve"
+   allow="127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1" /> -->
+     <Manager sessionAttributeValueClassNameFilter="java\.lang\.   (?:Boolean|Integer|Long|Number|String)|org\.apache\.catalina\.filters\.CsrfPreventionFilter\$LruCache(?:\$1)?|java\.util\.(?:Linked)?HashMap"/>
+   </Context>
+   ~
+   ~
+   ~
+   ~
+
+   :wq
+   
+   
+   #edit "/opt/tomcat/webapps/manager/META-INF/context.xml"
+   [root@ip-172-31-36-125 ~]#  vi /opt/tomcat/webapps/manager/META-INF/context.xml
+   
+   after edit 
+   
+   <?xml version="1.0" encoding="UTF-8"?>
+   <!--
+     Licensed to the Apache Software Foundation (ASF) under one or more
+     contributor license agreements.  See the NOTICE file distributed with
+     this work for additional information regarding copyright ownership.
+     The ASF licenses this file to You under the Apache License, Version 2.0
+     (the "License"); you may not use this file except in compliance with
+     the License.  You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+ 
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+   -->
+   <Context antiResourceLocking="false" privileged="true" >
+     <CookieProcessor className="org.apache.tomcat.util.http.Rfc6265CookieProcessor"
+                      sameSiteCookies="strict" />
+     <!--  <Valve className="org.apache.catalina.valves.RemoteAddrValve"
+     allow="127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1" /> -->
+     <Manager sessionAttributeValueClassNameFilter="java\.lang\.  (?:Boolean|Integer|Long|Number|String)|org\.apache\.catalina\.filters\.CsrfPreventionFilter\$LruCache(?:\$1)?|java\.util\.(?:Linked)?HashMap"/>
+   </Context>
+
+   ~
+   ~
+   ~
+   ~
+
+   -- INSERT --  
+   
+   
+   #Chek point
+   # shut down and restart tomcate server
+   [root@ip-172-31-36-125 ~]# cd /opt/tomcat/bin
+   [root@ip-172-31-36-125 bin]# ./shutdown.sh
+   [root@ip-172-31-36-125 bin]# ./startup.sh
+
+
+   ```
+   
+5. Creating users credentials to access the tomcat server
+   - To create new users we have to edit tomcat-user.xml file
+     ```sh
+      # go to conf dir
+      [root@ip-172-31-36-125 tomcat]# cd conf/
+      
+      # editing tomcat-user.xml file
+      [root@ip-172-31-36-125 conf]# vi tomcat-users.xml
+      
+      after edit 
+      
+      <?xml version="1.0" encoding="UTF-8"?>
+      <!--
+      Licensed to the Apache Software Foundation (ASF) under one or more
+      contributor license agreements.  See the NOTICE file distributed with
+      this work for additional information regarding copyright ownership.
+      The ASF licenses this file to You under the Apache License, Version 2.0
+      (the "License"); you may not use this file except in compliance with
+      the License.  You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+      Unless required by applicable law or agreed to in writing, software
+      distributed under the License is distributed on an "AS IS" BASIS,
+      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+      See the License for the specific language governing permissions and
+      limitations under the License.
+      -->
+     <tomcat-users xmlns="http://tomcat.apache.org/xml"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="http://tomcat.apache.org/xml tomcat-users.xsd"
+                 version="1.0">
+     <!--
+     By default, no user is included in the "manager-gui" role required
+     to operate the "/manager/html" web application.  If you wish to use this app,
+     you must define such a user - the username and password are arbitrary.
+
+     Built-in Tomcat manager roles:
+       - manager-gui    - allows access to the HTML GUI and the status pages
+       - manager-script - allows access to the HTTP API and the status pages
+       - manager-jmx    - allows access to the JMX proxy and the status pages
+       - manager-status - allows access to the status pages only
+
+     The users below are wrapped in a comment and are therefore ignored. If you
+     wish to configure one or more of these users for use with the manager web
+     application, do not forget to remove the <!.. ..> that surrounds them. You
+     will also need to set the passwords to something appropriate.
+     -->
+     <!--
+     <user username="admin" password="<must-be-changed>" roles="manager-gui"/>
+     <user username="robot" password="<must-be-changed>" roles="manager-script"/>
+   -- INSERT --
+
+       # creating shortcut to run start and shutdown tomcat server
+       [root@ip-172-31-36-125 conf]# ln -s /opt/tomcat/bin/startup.sh /usr/local/bin/tomcatup
+       [root@ip-172-31-36-125 conf]# ln -s /opt/tomcat/bin/shutdown.sh  /usr/local/bin/tomcatdown
+
+     ```
+## ----------------------------------------------------------------------------------------
+
+# Integrating tomcat with Jenkins
+   
 
 # ads
