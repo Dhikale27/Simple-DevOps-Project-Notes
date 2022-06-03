@@ -71,7 +71,7 @@ http://YOUR-SERVER-PUBLIC-IP:8080
 1. Check "console output"
 
 
-# ------------------------------------------------------------------------------------------------------------------------------------------------------------
+# --------------------------------------------------------------
 
 # Intigrating Git with Jenkins
 Git is one of the most popular tools for version control system. you can pull code from git repositories using jenkins if you use github plugin. 
