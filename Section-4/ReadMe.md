@@ -23,7 +23,7 @@
    
    #### Create the tomcat container
    
-     - we are going to use docker hub to get image of tomcat
-     - before pulling the image le chnage the name of our docker host
+   - we are going to use docker hub to get image of tomcat
+   - before pulling the image le chnage the name of our docker host
       
    
