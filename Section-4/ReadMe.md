@@ -18,8 +18,11 @@
       # to check status 
       [root@ip-172-31-39-151 ~]# service docker status
       ```
+      
    #### -------------------------------------------------------------------------------------
+   
    #### Create the tomcat container
+   
      - we are going to use docker hub to get image of tomcat
      - before pulling the image le chnage the name of our docker host
       
