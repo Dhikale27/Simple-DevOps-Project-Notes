@@ -47,10 +47,14 @@
       
       ```
    2. creating the docker container
-      - command to create new container for tomcat image
-          ```sh 
+          ```sh
+          # command to create new container for tomcat image
           [root@docker-host ~]# docker run -d --name tomcat-container -p 8081:8080 tomcat
           ```
        
-      
+   #### ------------------------------------------------------------------------------------------------
+   
+   #### Fixing Tomcat Container Issue
+   - tomcat 8 and onward facing issue i.e. on given port 8081 we are not able to access our tomcat
+   - 
    
