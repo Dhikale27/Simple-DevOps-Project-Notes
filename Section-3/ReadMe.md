@@ -199,7 +199,7 @@
 ## ----------------------------------------------------------------------------------------
 
 # Integrating tomcat with Jenkins
-  1. Install Deploy to container without restart 
+  1. Install `Deploy to container` without restart 
     - `Manage Jenkins` > `Manage plugin` > `available` > `Deploy to container` 
   
   2. Managing the credentials
@@ -209,11 +209,19 @@
            - ID : tomacat_deployer
            - Description : tomacat_deployer
   3. Creating new job  
-     - `New Item` > `Enter an item name` > `Maven Project` > `OK` > `Description` > `Source Code Management : Git : Repository Url = <address of git repo>` > `Build : goals and option = clean install` > `Post-build Actions : Deploy war'ear to container : WAR/EAR Files = **/*.war` > `Container : Add Container = Tomcat8x : Tomcat Url = http://<public ip add>:<port>/` > `Apply & Save`
+     - `New Item` > `Enter an item name` > `Maven Project` > `OK` > `Description` > `Source Code Management : Git : Repository Url = <address of git repo>` > `Build : goals and option = clean install` > `Post-build Actions : Deploy war/ear to container : WAR/EAR Files = **/*.war` > `Container : Add Container = Tomcat8x : Tomcat Url = http://<public ip add>:<port>/` > `Apply & Save`
   
   4. Build Code
      - Build code using build now and open the console 
      - refresh the tomcate server we will get /webapp option click on it new jsp page will open with form in it
+
+## ---------------------------------------------------------------------------------------------
+# Automate building & deploy using Poll SCM
+   - We want to automatic building of war files when we make a change in our code. This is possible by making change in `Build Triggers`. In Build Trigger there is lots of option currently we are going to use Poll SCM.
+   1. Make change in build job
+      - `Go to Job` > `configure` > `Build Triggers = select Poll SCM : in discription box write * * * * *` 
+   
+   - after making change make change in GitHub repository  
    
 
 # ads
