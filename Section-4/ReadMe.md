@@ -47,6 +47,7 @@
       ```
    2. creating the docker container
       - command to create new container for tomcat image
-        `[root@docker-host ~]# docker run -d --name tomcat-container -p 8081:8080 tomcat`
+      - ```sh [root@docker-host ~]# docker run -d --name tomcat-container -p 8081:8080 tomcat```
+       
       
    
