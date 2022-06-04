@@ -24,6 +24,29 @@
    #### Create the tomcat container
    
    - we are going to use docker hub to get image of tomcat
-   - before pulling the image le chnage the name of our docker host
+   - before pulling the image let change the name of our docker host
+     ```sh
+     [root@ip-172-31-39-151 ~]# vi /etc/hostname 
+     make change in above file as docker-host
+     
+     #reboot our terminal
+     [root@ip-172-31-39-151 ~]# init 6
+
+     ```
+   1. pull docker image
+      ```sh
+      # start docker service
+      [root@docker-host ~]# service docker start
+      
+      # pulling docker image
+      [root@docker-host ~]# docker pull tomcat
+      
+      # check docker images
+      [root@docker-host ~]# docker images
+      
+      ```
+   2. creating the docker container
+      - command to create new container for tomcat image
+        `[root@docker-host ~]# docker run -d --name tomcat-container -p 8081:8080 tomcat`
       
    
