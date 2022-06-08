@@ -142,5 +142,42 @@
         # to run tomcate we have to open the port after that we can run the tomcat
 
       ```
-   
-   
+   ### ------------------------------------------------------------------------------------------ 
+   #### Integrating Docker with jenkins
+   - Before integrating with docker we must have saperate user. We can use ec2-user but its not recomended
+   1. To create new User
+      ```sh
+        # to check list of user
+        [root@docker-host ~]# cat /etc/passwd
+        
+        # to add new user
+        [root@docker-host ~]# useradd dockeradmin
+        
+        # To set the password for dockeradmin
+        [root@docker-host ~]# passwd dockeradmin
+      
+      ```
+   2. Add this user into docker group
+      ```sh
+        # to add user in docker group
+        [root@docker-host ~]# usermod -aG docker dockeradmin
+      ```
+   3. Enbling password based authentication
+   - Currently we are using key base authentication to enable the password base authentication we have to configure sshd_config file
+      ```sh
+        # To edit the sshd_config file
+        [root@docker-host ~]# vi /etc/ssh/sshd_config
+        
+        in above file just change below things
+        # To disable tunneled clear text passwords, change to no here!
+        PasswordAuthentication yes
+        #PermitEmptyPasswords no
+        #PasswordAuthentication no
+        
+        # After editing we have to reload
+        [root@docker-host ~]# service sshd reload
+      ```
+   4. Adding docker host plugin to jenkin server
+      
+      
+  
