@@ -163,7 +163,7 @@
         [root@docker-host ~]# usermod -aG docker dockeradmin
       ```
    3. Enbling password based authentication
-   - Currently we are using key base authentication to enable the password base authentication we have to configure sshd_config file
+      - Currently we are using key base authentication to enable the password base authentication we have to configure sshd_config file
       ```sh
         # To edit the sshd_config file
         [root@docker-host ~]# vi /etc/ssh/sshd_config
@@ -178,6 +178,55 @@
         [root@docker-host ~]# service sshd reload
       ```
    4. Adding docker host plugin to jenkin server
+      - to connect our docker host with jenkin server we required to add docker host plugins(Publish Over SSH) in jenkins server
+      - `Manage jenkins` > `Manage plugins` > `Available` > `Publish Over SSH` > `Install without restart`
+      - `Manage jenkins` > `Configure system` > `Publish Over SSH : Add SSH : Name = dockerhost & Hostname= <private ip add> & Username=dockeradmin & Password = dockeradmin123` > `Test Configuration`
+
+   5. Creating new Job to build and deploy artifect on docker container
+      - we already create job for pull build deoply code so we will use thae job and creat new job
+      - `New Item` > `Enter Item Name` > `Copy From = <old job>` > `Ok` > `Post Build Action : Send Build artifects over SSh : ssh server Name = dockerhost & Source file = webapp/target/*.war & Remove prefix = webapp/target` > `Apply & Save`.
+      - after saving Build will happen automatically.
+
+
+   ### -----------------------------------------------------------------------------------------------------------
+   #### Updating the tomcat docker file to automate deployment process
+   - let us create a separate dirctory for dockerfile and artifects so we can easily run the dockerfile
+   1. Creating directory
+      ```sh
+        # exite first from dockeradmin
+        [dockeradmin@docker-host ~]$ exit
+           logout
+       [ec2-user@docker-host ~]$
+       [ec2-user@docker-host opt]$ sudo su -
+       [root@docker-host ~]#
+       
+       # create dir
+       [root@docker-host ~]# cd /opt
+       [root@docker-host opt]# mkdir docker
+       
+       # we have to give permission to dockeradmin for accesing the docker dir
+       [root@docker-host opt]# chown -R dockeradmin:dockeradmin docker
+       
+       # after giving persmission we will get
+       [root@docker-host opt]# ll
+         total 0
+         drwxr-xr-x 4 root        root        33 Apr 28 19:54 aws
+         drwx--x--x 4 root        root        28 Jun  8 09:01 containerd
+         drwxr-xr-x 2 dockeradmin dockeradmin  6 Jun  8 13:05 docker
+         drwxr-xr-x 2 root        root         6 Aug 16  2018 rh
+         
+       # move Dockerfile to docker dir
+       [root@docker-host ~]# mv Dockerfile /opt/docker/
+       
+       #give persion to dockeradmin to acess the adocker file
+       [root@docker-host docker]# chown -R dockeradmin:dockeradmin /opt/docker/
+       
+       # after this we have make change in jenkin job 
+       go to "jenkin job configuration >> chnage Remote directoru = /opt/docker"
+ 
+
+
+      ```
       
       
   
