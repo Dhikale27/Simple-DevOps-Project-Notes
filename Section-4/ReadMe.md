@@ -221,12 +221,17 @@
        #give persion to dockeradmin to acess the adocker file
        [root@docker-host docker]# chown -R dockeradmin:dockeradmin /opt/docker/
        
+   2. Changes In Jenkin Job and Building it    
        # after this we have make change in jenkin job 
-       go to "jenkin job configuration >> chnage Remote directoru = /opt/docker"
+       go to "jenkin job configuration >> change Remot directory  = //opt//docker >> Apply & Save"
+       
+       #after this build job and check docker dir
+       [root@docker-host docker]# ls
+       Dockerfile  webapp.war
  
 
 
-      ```
+     
       
       
   
