@@ -111,6 +111,36 @@
       RUN mv apache-tomcat-9.0.63/* /opt/tomcat
       EXPOSE 8080
       CMD ["/opt/tomcat/bin/catlina.sh", "run"]
-     ```
+      ```
+     
+   #### Customise Docker file for Tomcate
+   - in tis section we create a docker to create image of tomcat and to cofigure for globally access
+   1. Create Docker file
+      ```sh
+        # creating docker file
+        [root@docker-host ~]# vi Dockerfile
+        
+        in above file add 
+          FROM tomcat:latest
+          RUN cp -R /usr/local/tomcat/webapps.dist/* /usr/local/tomcat/webapps
+          ~
+          ~
+          ~
+          
+        # run the docker file
+        [root@docker-host ~]# docker build -t demotomcat .
+        
+        #demotomcat docker image will get generate
+        #to check the docker images
+        [root@docker-host ~]# docker images
+        
+        #creating the container
+        [root@docker-host ~]# docker run -d --name demotomcat -p 8085:8080 demotomcat
+        
+        [root@docker-host ~]# docker ps 
+        
+        # to run tomcate we have to open the port after that we can run the tomcat
+
+      ```
    
    
