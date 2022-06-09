@@ -257,6 +257,21 @@
         # check for container running
         [root@docker-host docker]# docker ps
         
+        # check the address whtether we can access or not
+        - open browser and go given address http://<public-ip- address>/webapp/
+   
+   ### -----------------------------------------------------------------------------------------------
+   #### Automate build and deployment on docker container
+   - After commiting code in git then that code shold automatically pull by jenkins then its artifect shoild be get created by maven build tool, once artifect generate then the docker image shold be get create by automatic and once docker image get create container should run automatically. This part we will see this section
+   - go to out old job (PullBuildDeployCodeOnContainer) `Configure` > `Post-Build Action : Exec command = cd /opt/docker; docker build -t regapp:v1; docker run -d --name registerapp -p 8087:8080 regapp:v1` > `Apply & Save`
+   - after saving build the job we will see conatine run automatically.
+   - Now go to our source code and make change in that then push the code in repository then container will run automatically.
+   1. Resolving Automatic build issue: 
+      - If we have already container present in docker host then we face error while next building.
+      - go to out old job (PullBuildDeployCodeOnContainer) `Configure` > `Post-Build Action : Exec command = cd /opt/docker; docker build -t regapp:v1; docker stop registerapp; docker rm registerapp; docker run -d --name registerapp -p 8087:8080 regapp:v1` > `Apply & Save`. 
+
+        
+        
     
         
         
