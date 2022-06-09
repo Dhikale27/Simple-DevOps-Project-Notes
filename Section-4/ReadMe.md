@@ -221,13 +221,47 @@
        #give persion to dockeradmin to acess the adocker file
        [root@docker-host docker]# chown -R dockeradmin:dockeradmin /opt/docker/
        
-   2. Changes In Jenkin Job and Building it    
+   2. Changes In Jenkin Job and Building it
+      ```sh  
        # after this we have make change in jenkin job 
-       go to "jenkin job configuration >> change Remot directory  = //opt//docker >> Apply & Save"
+       go to "jenkin job configuration >> change Remote directory  = //opt//docker >> Apply & Save"
        
-       #after this build job and check docker dir
+       # after this build job and check docker dir
        [root@docker-host docker]# ls
        Dockerfile  webapp.war
+   
+   3. Editing Docker file and executing it
+      - to create the docker container with war file we have change the DOckerfile
+      ```sh
+        # To edit the docker file
+        [root@docker-host docker]# vi Dockerfile
+        
+        # After editing Docker file
+        FROM tomcat:latest
+        RUN cp -R /usr/local/tomcat/webapps.dist/* /usr/local/tomcat/webapps
+        COPY ./*.war /usr/local/tomcat/webapps
+        ~
+        ~
+        
+        # Execute docker file
+        [root@docker-host docker]# docker build -t tomcat:v1 .
+        
+        # check for images
+        [root@docker-host docker]# docker images
+        
+        # creating container from image
+        [root@docker-host docker]# docker run -d --name tomcatev1 -p 8086:8080 tomcat:v1
+        
+        here v1 is important
+        
+        # check for container running
+        [root@docker-host docker]# docker ps
+        
+    
+        
+        
+
+        
  
 
 
