@@ -25,4 +25,205 @@
      [root@ansible-server ~]# visudo
      
      # in above file add ansadmin ALL=(ALL)         ALL   
+
+4. Eable password based authentication
+   ```sh
+     # edit file
+     [root@ansible-server ~]# vi /etc/ssh/sshd_config
      
+     # make change as mension below
+       PasswordAuthentication yes
+       #PermitEmptyPasswords no
+       #PasswordAuthentication no
+     
+     #after edit reload
+     [root@ansible-server ~]# service sshd reload
+    
+5. Creating the ssh key for ansadmin user
+   ```sh
+     # login as ansadmin
+     [ec2-user@ansible-server ~]$ sudo su - ansadmin
+     [ansadmin@ansible-server ~]$
+     
+     # creating new ssh key
+     [ansadmin@ansible-server ~]$ ssh-keygen
+       Generating public/private rsa key pair.
+       Enter file in which to save the key (/home/ansadmin/.ssh/id_rsa):
+       Created directory '/home/ansadmin/.ssh'.
+       Enter passphrase (empty for no passphrase):
+       Enter same passphrase again:
+       Your identification has been saved in /home/ansadmin/.ssh/id_rsa.
+       Your public key has been saved in /home/ansadmin/.ssh/id_rsa.pub.
+       The key fingerprint is:
+       SHA256:Gcn+gyL18TtzN2T0S0tzV71DRKTE1h0Ej4QskDttnhg ansadmin@ansible-server
+       The key's randomart image is:
+       +---[RSA 2048]----+
+       |       .o . o+*=o|
+       |       o o ooo+o.|
+       |        * . .o...|
+       |       E =    ..o|
+       |      . S .  ...o|
+       |     . o B    o*+|
+       |    . . o +  oo B|
+       |     . .  oo. oo |
+       |          .+ . . |
+       +----[SHA256]-----+
+
+5. Install ansible
+   - To install insible we required python install. In our ec2 instace having linux operating system and oython is bydefault present in linux system.
+   ```sh
+     # install ansible
+     [root@ansible-server ~]# amazon-linux-extras install ansible2
+     
+     # To check installation
+     [root@ansible-server ~]# python --version
+     [root@ansible-server ~]# ansible --version
+     
+     
+### ------------------------------------------------------------------------------------------------------
+
+## Integrating Docker with ansible
+1. Create new user ansadmin in docker-host > add usr to sudoerce file
+
+2. Add docker-host manager node in ansible-server
+   ```sh
+     #edit hosts file
+     [root@ansible-server ~]# vi /etc/ansible/hosts
+     
+     #in above file add private ip add of docker-host
+     
+3. Adding ssh key to docker-host 
+   ```sh
+      [ansadmin@ansible-server .ssh]$ ssh-copy-id 172.31.33.185
+      
+4. Creating connection 
+   ```sh
+     [ansadmin@ansible-server home]$ ansible all -m  ping
+     
+     # above command meaning : try to connect all hosts which present in inventory file
+     
+     # to check the connection
+     [ansadmin@ansible-server home]$ ansible all -m command -a uptime
+
+     
+### -------------------------------------------------------------------------------------------------------------
+
+## Integrating ansible with jenkins
+- Integration of ansible with jenkins is almost same as with docker
+1. make change in configure system of jenkins
+   - `Manage jenkins` > `configure jenkins` > `ssh server : ADD : Server Name = ansible-server & Hostname = <private ip address of ansible server> & username = ansadmin & password = ansadmin123` > `Test Configuration` > `Apply & Success`
+
+2. Creating new job to build and copy artifects on ansible
+   - `New Item` > `Enter New Item Name` > `PullBuildDeployOnConatiner` > `OK` > `Post-Build-Action : SSH Server name = ansible-server (other setting will same, We have to create remote directory /opt/docker on ansible and also giv ansadmin permission to access docker folder)` > `Apply & Save`
+   
+3. Build Now the job
+
+### ---------------------------------------------------------------------------------------------------
+## Building image and container on ansible
+- Creating image is almost same as we see in docker
+1. install docker on ansible
+2. add ansadmin to docker group
+   ```sh 
+     # add user in docker
+     [root@ansible-server docker]# usermod -aG docker ansadmin
+   
+3. Creating docker file
+   ```sh
+     [root@ansible-server docker]# vi Dockerfile
+     
+     # In above file add
+       FROM tomcat:latest
+       RUN cp -R /usr/local/tomcat/webapps.dist/* /usr/local/tomcat/webapps
+       COPY ./*.war /usr/local/tomcat/webapps
+       
+     # Giving permission to ansadmin to read the dockerfile
+     [root@ansible-server docker]# chmod 777 /var/run/docker.sock
+     
+     # Create image
+     [root@ansible-server docker]# docker build -t regapp:v1 .
+     
+     #crteate container
+     [root@ansible-server docker]# docker run -t --name regapp-server -p 8081:8080 regapp:v1
+     
+### ----------------------------------------------------------------------------------------------------------
+
+## Ansible playbook to create the image and container
+- we will create the images and container by using ansible playbook for this we use ansible-playbook command
+1. Adding ansible ip address in invetory file
+   - To execute ansible playbook we have to add private ip address to ansible invetory(/etc/ansible/hosts) file.
+   ```sh
+     # edit inventory file
+     [root@ansible-server docker]# vi /etc/ansible/hosts
+     
+     # In above file add
+       [dockerhost]
+       172.31.33.185
+
+      [ansible]
+      172.31.5.102
+2. copy ssh key to ansible-server
+   ```sh
+     [ansadmin@ansible-server docker]$ ssh-copy-id 172.31.5.102
+     
+     # check uptime
+     [ansadmin@ansible-server docker]$ ansible all -a uptime
+
+3. write ansible playbook
+   ```sh
+     #create new yml file
+     [ansadmin@ansible-server docker]$ vi regapp.yml
+     
+     # above file add below data
+       ---
+       - hosts: ansible
+
+         tasks:
+         - name: create docker image
+           command: docker build -t regapp:lates .
+           args:
+            chdir: /opt/docker
+            
+     # check before execute the yml file
+     [ansadmin@ansible-server docker]$ ansible-playbook regapp.yml --check
+
+     # execute the yml file
+     [ansadmin@ansible-server docker]$ ansible-playbook regapp.yml
+
+    # check images
+    [ansadmin@ansible-server docker]$ docker images
+     
+### -----------------------------------------------------------------------------------------
+## Copy image to dockerhub
+- to push images on dockerhub we required a dockerhub account
+1. Docker Login
+   ```sh
+     # to login
+     [ansadmin@ansible-server docker]$ docker login
+     
+     #provide username and password
+     
+2. Push image to dockerhub
+   ```sh
+     # giving tad to image
+     [ansadmin@ansible-server docker]$ docker tag b1a397acf8fb sachin27021992/regapp:latest
+     
+     #Push image 
+     [ansadmin@ansible-server docker]$ docker push sachin27021992/regapp:latest
+
+     
+
+
+
+
+
+       
+
+
+
+
+
+
+
+
+
+
