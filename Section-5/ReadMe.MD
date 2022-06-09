@@ -6,3 +6,23 @@
 ### Pre-requisites
 
 1. An AWS EC2 instance (on Control node)
+
+### Instalation
+
+1. Creating EC2 instance
+
+2. Create Session and change host name.
+
+3. Create new user
+   ```sh
+     # Creating new user
+     [root@ansible-server ~]# useradd ansadmin
+     
+     #Set password
+     [root@ansible-server ~]# passwd ansadmin
+     
+     # Add user to visudo file
+     [root@ansible-server ~]# visudo
+     
+     # in above file add ansadmin ALL=(ALL)         ALL   
+     
