@@ -248,9 +248,39 @@
    - to automate the process of push image on dockerhub we have to configure our old jinkins job.
    - go to `CopyArtifectOntoAnsible : configure` > `activate Poll SCM` > `Post-Build Action : Exec command = ansible-playbook /opt/docker/regapp.yml` > `Apply & Save`. 
    - after configuration make chnage in our source code, we will see automatic building of job and new updated image will get upload.
+   
+### ----------------------------------------------------------------------------------------------------------------------
+
+## Create Container using Ansible Playbook
+- we have already created container for push image to dockerhub. Now we will create another playbook for pull image from dockerhub and create container of it
+1. create ansible playbook
+   ```sh
+     # create new playbook
+     [ansadmin@ansible-server docker]$ vi deploy_regapp.yml
+     
+     # In above file add below data
+       ---
+       - hosts: dockerhost
+
+       tasks:
+       - name: create container
+         command: docker run -d --name regapp-server -p 8082:8080 sachin27021992/regapp:latest
 
      
-
+2. To execute the ansible playbook
+   - before executing remove previous images and container
+   ```sh
+     # give permission
+     [root@docker-host ~]# chmod 777 /var/run/docker.sock
+     
+     # executing command
+     [ansadmin@ansible-server ~]# ansible-playbook deploy_regapp.yml
+     
+     #check docker images
+     [root@docker-host ~]# docker images
+     
+     #check on wbsite
+     http://<public ip add of docker host>/8082/webapp
 
 
 
