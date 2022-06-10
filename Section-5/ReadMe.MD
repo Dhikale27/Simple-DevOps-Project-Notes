@@ -236,7 +236,18 @@
          command: docker push sachin27021992/regapp:latest
 
 2. Executing ansible playbook file
-   
+   ```sh
+     # to check
+     [ansadmin@ansible-server docker]$ ansible-playbook regapp.yml --check
+     
+     # to execute
+     [ansadmin@ansible-server docker]$ ansible-playbook regapp.yml
+     
+     
+3. Change in Jenkins job 
+   - to automate the process of push image on dockerhub we have to configure our old jinkins job.
+   - go to `CopyArtifectOntoAnsible : configure` > `activate Poll SCM` > `Post-Build Action : Exec command = ansible-playbook /opt/docker/regapp.yml` > `Apply & Save`. 
+   - after configuration make chnage in our source code, we will see automatic building of job and new updated image will get upload.
 
      
 
