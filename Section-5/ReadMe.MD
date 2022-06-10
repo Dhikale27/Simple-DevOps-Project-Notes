@@ -284,9 +284,37 @@
      
 3. Continuous deployment of docker container
    - we create playbook to pull image from dockerhub and create container from that. Now If container is already running or exist in system then we face error when we try to run ansible playbook(which cointain same container creation task)
-   - To solve above issue we will edit ansible playbook file and add
-         - task to remove old container
-         - task to remove old image as if image present in our system it not pull latest image
+   - To solve above issue we will edit ansible playbook file and add task to remove old container and task to remove old image as if image present in our system it not pull latest image.
+   
+   ```sh
+     # edit ansible playbook of deployment
+     [ansadmin@ansible-server docker]$ vi deploy_regapp.yml
+
+     
+     # after editing our file should look like this
+     ---
+- hosts: dockerhost
+
+  tasks:
+  - name: stop existing container
+    command: docker stop regapp-server
+    ignore_errors: yes
+
+
+  - name: remove the container
+    command: docker rm regapp-server
+    ignore_errors: yes
+
+  - name: remove image
+    command: docker rmi sachin27021992/regapp:latest
+    ignore_errors: yes
+
+  - name: create container
+    command: docker run -d --name regapp-server -p 8082:8080 sachin27021992/regapp:latest
+
+
+    
+  
    
 
 
