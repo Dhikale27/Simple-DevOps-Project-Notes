@@ -310,22 +310,13 @@
 
        - name: create container
          command: docker run -d --name regapp-server -p 8082:8080 sachin27021992/regapp:latest
+         
+### -------------------------------------------------------------------------------------------------------
 
+## Automat Everything
+- Now we are going to automate everything i.e. pulling code from github by using jenkins, building code i.e. creating artifects by using maven, creating image and deploying that image on dockerhub and Pulling image from dockerhub and crating container with help of ansible and docker.
+- go to `CopyArtifectOntoAnsible job` > `Configur` > `Post-Build Action : Exec Comand = ansible-playbook /opt/docker/regapp.yml; sleep 10; ansible-playbook /opt/docker/deploy_regapp.yml;` > `Apply &  Save`.
+- after  that go to source code and make some chnage so we test our application.
+- meanwhile during code we create different job, just remove Poll SCM for them so the will not trigger automatically
 
-    
-  
-   
-
-
-
-       
-
-
-
-
-
-
-
-
-
-
+## ---------------------------------------------------- END --------------------------------------------------
