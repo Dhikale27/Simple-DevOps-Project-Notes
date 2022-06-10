@@ -210,6 +210,34 @@
      #Push image 
      [ansadmin@ansible-server docker]$ docker push sachin27021992/regapp:latest
 
+### -------------------------------------------------------------------------------------------------------------------
+
+## Jenkin job to push an image onto ansible
+
+1. Add image push code in ansible playbook
+   ```sh
+     # edit yml file
+     [ansadmin@ansible-server docker]$ vi regapp.yml
+     
+     # above file shoid lool like
+       ---
+       - hosts: ansible
+
+       tasks:
+       - name: create docker image
+         command: docker build -t regapp:lates .
+         args:
+          chdir: /opt/docker
+
+       - name: create tag push image onto dockerhub
+         command: docker tag regapp:latest sachin27021992/regapp:latest
+
+       - name: push docker image
+         command: docker push sachin27021992/regapp:latest
+
+2. Executing ansible playbook file
+   
+
      
 
 
