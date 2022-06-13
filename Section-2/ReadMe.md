@@ -14,17 +14,17 @@ You can install jenkins using the rpm or by setting up the repo. We will set up 
 
 1. Get the latest version of jenkins from https://pkg.jenkins.io/redhat-stable/ and install
    ```sh
-   sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
-   sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
-   amazon-linux-extras install epel 
-   amazon-linux-extras install java-openjdk11
-   yum install jenkins
+     sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+     sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+     amazon-linux-extras install epel 
+     amazon-linux-extras install java-openjdk11
+     yum install jenkins
    
-   #on RedHat/CentOs 
-   #yum install epel-release # repository that provides 'daemonize'
-   #yum install java-11-openjdk-devel
-   #yum install jenkins
-   ```
+     #on RedHat/CentOs 
+     #yum install epel-release # repository that provides 'daemonize'
+     #yum install java-11-openjdk-devel
+     #yum install jenkins
+  
 ### Start Jenkins
    ```sh
    # check jenkins service status
@@ -148,15 +148,16 @@ Maven is a code build tool which used to convert your code to an artifact. this 
          drwxr-xr-x 2 root root       6 Aug 16  2018 rh
        [root@ip-172-31-34-251 opt]#
        [root@ip-172-31-34-251 opt]#
-       ```
+
 
 	
 2. Setup M2_HOME and M2 paths in .bash_profile of the user and add these to the path variable
   ```sh
-   - to go root dir
-    - [root@ip-172-31-34-251 opt]# cd ~
-   - to get hidden files
-    - [root@ip-172-31-34-251 ~]# ll -a
+   # to go root dir
+   [root@ip-172-31-34-251 opt]# cd ~
+   
+   # to get hidden files
+   [root@ip-172-31-34-251 ~]# ll -a
     
        total 20
        dr-xr-x---  3 root root 103 Jun  3 02:37 .
@@ -167,17 +168,17 @@ Maven is a code build tool which used to convert your code to an artifact. this 
        -rw-r--r--  1 root root 100 Oct 18  2017 .cshrc
        -drwx------  2 root root  29 Jun  3 02:37 .ssh
        -rw-r--r--  1 root root 129 Oct 18  2017 .tcshrc
-       ```
-   [root@ip-172-31-34-251 ~]#
+  
+ 
    
-   - to get the path ex java-11
+   # to get the path ex java-11
      [root@ip-172-31-34-251 jvm]# find / -name java-11*
        /usr/lib/jvm/java-11-openjdk-11.0.13.0.8-1.amzn2.0.3.x86_64
        /usr/share/doc/java-11-openjdk-11.0.13.0.8-1.amzn2.0.3.x86_64
      [root@ip-172-31-34-251 jvm]#
 
    
-   - to edit the .bash_profile file
+   # to edit the .bash_profile file
      [root@ip-172-31-34-251 jvm]# vi .bash_profile
    
    - to edit in vi editor we have to use command like
