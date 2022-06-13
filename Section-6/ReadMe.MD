@@ -1,1 +1,3 @@
-# Kubarnatics
+# Kubarnates
+
+## Installing kubernates
