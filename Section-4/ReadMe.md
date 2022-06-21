@@ -268,7 +268,7 @@
    - Now go to our source code and make change in that then push the code in repository then container will run automatically.
    1. Resolving Automatic build issue: 
       - If we have already container present in docker host then we face error while next building.
-      - go to out old job (PullBuildDeployCodeOnContainer) `Configure` > `Post-Build Action : Exec command = cd /opt/docker; docker build -t regapp:v1; docker stop registerapp; docker rm registerapp; docker run -d --name registerapp -p 8087:8080 regapp:v1` > `Apply & Save`. 
+      - go to out old job (PullBuildDeployCodeOnContainer) `Configure` > `Post-Build Action : Exec command = cd /opt/docker; docker build -t regapp:v1 .; docker stop registerapp; docker rm registerapp; docker run -d --name registerapp -p 8087:8080 regapp:v1` > `Apply & Save`. 
 
         
         
