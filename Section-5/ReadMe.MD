@@ -84,6 +84,16 @@
 
 ## Integrating Docker with ansible
 1. Create new user ansadmin in docker-host > add usr to sudoerce file
+   ```sh
+     #create new user in dockerhost name as ansadmin
+     [root@docker-host ~]# useradd ansadmin
+     [root@docker-host ~]# passwd ansadmin
+     [root@docker-host ~]# visudo
+     
+     #in above file add
+     ansadmin        ALL=(ALL)       NOPASSWD: ALL
+
+     
 
 2. Add docker-host manager node in ansible-server
    ```sh
